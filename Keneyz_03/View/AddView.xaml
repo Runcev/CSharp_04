@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Keneyz_03.View.AddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Keneyz_03.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding MyPerson.Name, Mode=TwoWay}"></TextBox>
+        <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding MyPerson.Surname, Mode=TwoWay}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding MyPerson.Email, Mode=TwoWay}"></TextBox>
+        <DatePicker SelectedDateFormat="Long"  Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" SelectedDate="{Binding MyPerson.Birthday, Mode=TwoWay}"></DatePicker>
+
+        <TextBlock Text="Name" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+        <TextBlock Text="Surname" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+        <TextBlock Text="Email" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+        <TextBlock Text="Birthday" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+
+        <Button Content="Create" Margin="80 5" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="5" Command="{Binding ProceedCommand}"></Button>
+        <Button Content="Return"  Margin="80 5" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="5" Command="{Binding CancelCommand}"></Button>
+    </Grid>
+</UserControl>
