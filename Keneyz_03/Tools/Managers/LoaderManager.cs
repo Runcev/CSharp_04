@@ -15,7 +15,7 @@ namespace Keneyz_03.Tools.Managers
                     return _instance;
                 lock (Locker)
                 {
-                    return _instance ?? (_instance = new LoaderManeger());
+                    return _instance ??= new LoaderManeger();
                 }
             }
         }

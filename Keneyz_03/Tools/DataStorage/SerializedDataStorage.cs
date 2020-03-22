@@ -8,133 +8,137 @@ namespace Keneyz_03.Tools.DataStorage
 {
     internal class SerializedDataStorage : IDataStorage
     {
-        private readonly List<Person> _users;
+        private readonly List<Person> _persons;
 
         internal SerializedDataStorage()
         {
             try
             {
-                _users = SerializationManager.Deserialize<List<Person>>(FileFolderHelper.StorageFilePath);
+                _persons = SerializationManager.Deserialize<List<Person>>(FileFolderHelper.StorageFilePath);
             }
             catch (FileNotFoundException)
             {
-                _users = new List<Person>();
+                _persons = new List<Person>();
+
                 string[] names =
                 {
-                    "Thad",
-                    "Lottie",
-                    "Bryant",
-                    "Callie",
-                    "Vincent",
-                    "Delilah",
-                    "Julieta",
-                    "Tiffany",
-                    "Shayne",
-                    "Selena",
-                    "Lori",
-                    "Kaylee",
-                    "Chastity",
-                    "Kathrin",
-                    "Ozie",
-                    "Kala",
-                    "Nettie",
-                    "Drusilla",
-                    "Kourtney",
-                    "Daisey",
+                    "Julia",
+                    "Simon",
+                    "Audrey",
+                    "Sonia",
+                    "Alan",
+                    "Austin",
+                    "Angela",
+                    "Paul",
+                    "Andrew",
+                    "Felicity",
+                    "Eric",
+                    "Joanne",
+                    "Sam",
+                    "Dominic",
+                    "Neil",
+                    "Brian",
+                    "Olivia",
+                    "Kevin",
+                    "Katherine",
+                    "John",
                     "Sasha",
-                    "Chet",
-                    "Elaina",
-                    "Harlan",
-                    "Nilda",
-                    "Debby",
-                    "Grazyna",
-                    "Jocelyn",
-                    "Ross",
-                    "Shelia",
-                    "Anjelica",
-                    "Albertina",
-                    "Marjory",
-                    "Art",
-                    "Frances",
-                    "Thomasena",
-                    "Daniela",
-                    "Marisol",
-                    "Kirsten",
-                    "Faviola",
-                    "Adriane",
-                    "Rita",
-                    "Breana",
-                    "Jeannie",
-                    "Kathy",
-                    "Necole",
-                    "Alfreda",
-                    "Pamelia",
-                    "Rubye",
-                    "Lizette"
+                    "Lucas",
+                    "Adam",
+                    "Matt",
+                    "Justin",
+                    "Joshua",
+                    "Edward",
+                    "Joe",
+                    "Evan",
+                    "Amelia",
+                    "Brandon",
+                    "Luke",
+                    "Woody",
+                    "Ben",
+                    "Carol",
+                    "Bella",
+                    "Jan",
+                    "Irene",
+                    "Rose",
+                    "Carl",
+                    "Brian",
+                    "Harry",
+                    "Sue",
+                    "Isaac",
+                    "Zohan",
+                    "Frank",
+                    "Theresa",
+                    "Wanda",
+                    "Tony",
+                    "Zoe"
                 };
+
                 string[] surnames =
                 {
-                    "Guzman",
-                    "Howe",
-                    "Albright",
-                    "Tackett",
-                    "Woody",
-                    "Maloney",
-                    "Strong",
-                    "Kelley",
-                    "Mccullough",
-                    "Overton",
-                    "Sadler",
-                    "Katz",
-                    "Espinoza",
-                    "Rivers",
-                    "Holman",
-                    "Goldman",
-                    "Mead",
-                    "Bland",
+                    "Clark",
+                    "Graham",
+                    "Johnston",
+                    "Edmunds",
+                    "Fraser",
+                    "Bond",
+                    "Alsop",
+                    "Dickens",
+                    "North",
+                    "Martin",
+                    "Coleman",
+                    "Gates",
+                    "Wallace",
+                    "Springer",
+                    "Quinn",
+                    "Kerr",
+                    "Jones",
+                    "MvGrath",
+                    "Pullman",
+                    "Ince",
+                    "Roberts",
+                    "Parson",
                     "Campbell",
-                    "Geiger",
-                    "Dodd",
-                    "Greenwood",
-                    "Cardenas",
-                    "Maloney",
-                    "Rushing",
-                    "Waller",
-                    "Higgins",
-                    "Adkins",
-                    "Aguilar",
-                    "Tolbert",
-                    "Macias",
-                    "Hagan",
-                    "Dailey",
-                    "Aguilar",
-                    "Nance",
-                    "Childers",
-                    "Goins",
-                    "Griggs",
-                    "Shipley",
-                    "Caldwell",
-                    "Meadows",
-                    "Cowan",
-                    "Reynolds",
-                    "Copeland",
-                    "Rodgers",
-                    "Story",
-                    "Forrest",
-                    "Hoover",
-                    "Ohara",
-                    "Aldrich"
+                    "Slater",
+                    "Carr",
+                    "Price",
+                    "Dowd",
+                    "Dyer",
+                    "Black",
+                    "Gibson",
+                    "Turner",
+                    "Hoogarden",
+                    "Gray",
+                    "Glover",
+                    "Haris",
+                    "Langdon",
+                    "Lee",
+                    "Hardacre",
+                    "Lewis",
+                    "Mackay",
+                    "Paige",
+                    "Morgan",
+                    "Miller",
+                    "May",
+                    "Poole",
+                    "Smith",
+                    "Skinner",
+                    "Walker",
+                    "Stark",
+                    "Sharp"
                 };
+
                 Random random = new Random();
 
-                for (int i = 0; i < 50; ++i)
+                for (var i = 0; i < 50; i++)
                 {
-                    DateTime birthday = new DateTime(random.Next(1900, 2010), random.Next(1, 12), random.Next(1, 28));
-                    string email = names[i][0] + "." + surnames[i] + "@gmail.com";
+                    DateTime birthday = new DateTime(random.Next(1919, 2014), random.Next(1, 12), random.Next(1, 28));
 
-                    Person tmp = new Person(names[i], surnames[i], email, birthday);
+                    string email = names[i].ToLower() + "." + surnames[i][0] + "@test.com";
 
-                    _users.Add(tmp);
+                    Person temp = new Person(names[i], surnames[i], email, birthday);
+
+                    _persons.Add(temp);
                 }
 
                 SaveChanges();
@@ -143,18 +147,18 @@ namespace Keneyz_03.Tools.DataStorage
 
         public bool PersonExists(Person person)
         {
-            return _users.Contains(person);
+            return _persons.Contains(person);
         }
 
         public void AddPerson(Person person)
         {
-            _users.Add(person);
+            _persons.Add(person);
             SaveChanges();
         }
 
         public void RemovePerson(Person person)
         {
-            _users.Remove(person);
+            _persons.Remove(person);
             SaveChanges();
         }
 
@@ -163,14 +167,11 @@ namespace Keneyz_03.Tools.DataStorage
             SaveChanges();
         }
 
-        public List<Person> PersonsList
-        {
-            get { return _users; }
-        }
+        public List<Person> PersonsList => _persons;
 
         private void SaveChanges()
         {
-            SerializationManager.Serialize(_users, FileFolderHelper.StorageFilePath);
+            SerializationManager.Serialize(_persons, FileFolderHelper.StorageFilePath);
         }
     }
 }

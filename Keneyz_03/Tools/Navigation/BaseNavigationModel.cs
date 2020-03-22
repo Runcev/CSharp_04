@@ -13,15 +13,9 @@ namespace Keneyz_03.Tools.Navigation
             _viewsDictionary = new Dictionary<ViewType, INavigatable>();
         }
 
-        protected IContentOwner ContentOwner
-        {
-            get { return _contentOwner; }
-        }
+        protected IContentOwner ContentOwner => _contentOwner;
 
-        protected Dictionary<ViewType, INavigatable> ViewsDictionary
-        {
-            get { return _viewsDictionary; }
-        }
+        protected Dictionary<ViewType, INavigatable> ViewsDictionary => _viewsDictionary;
 
         public void Navigate(ViewType viewType)
         {

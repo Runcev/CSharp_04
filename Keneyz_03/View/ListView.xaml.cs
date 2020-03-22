@@ -10,6 +10,7 @@ namespace Keneyz_03.View
     /// </summary>
     public partial class ListView : UserControl, INavigatable
     {
+        
         public ListView()
         {
             InitializeComponent();

@@ -16,10 +16,8 @@ namespace Keneyz_03.Tools.Managers
                     file.Delete();
                 }
                 var formatter = new BinaryFormatter();
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    formatter.Serialize(stream, obj);
-                }
+                using var stream = new FileStream(filePath, FileMode.Create);
+                formatter.Serialize(stream, obj);
             }
             catch (Exception ex)
             {
@@ -32,12 +30,14 @@ namespace Keneyz_03.Tools.Managers
             try
             {
                 if (!FileFolderHelper.CreateFolderAndCheckFileExistance(filePath))
-                    throw new FileNotFoundException("File doesn't exist.");
-                var formatter = new BinaryFormatter();
-                using (var stream = new FileStream(filePath, FileMode.Open))
                 {
-                    return (TObject)formatter.Deserialize(stream);
+                    throw new FileNotFoundException("File doesn't exist.");
                 }
+
+                var formatter = new BinaryFormatter();
+                using var stream = new FileStream(filePath, FileMode.Open);
+
+                return (TObject)formatter.Deserialize(stream);
             }
             catch (FileNotFoundException ex)
             {

@@ -14,7 +14,7 @@ namespace Keneyz_03.ViewModel
         #region Properties
         public Visibility LoaderVisibility
         {
-            get { return _loaderVisibility; }
+            get => _loaderVisibility;
             set
             {
 
@@ -24,7 +24,7 @@ namespace Keneyz_03.ViewModel
         }
         public bool IsControlEnabled
         {
-            get { return _isControlEnabled; }
+            get => _isControlEnabled;
             set
             {
                 _isControlEnabled = value;

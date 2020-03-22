@@ -18,10 +18,7 @@ namespace Keneyz_03.Tools.Managers
 
         private static IDataStorage _dataStorage;
 
-        internal static IDataStorage DataStorage
-        {
-            get { return _dataStorage; }
-        }
+        internal static IDataStorage DataStorage => _dataStorage;
 
         internal static void Initialize(IDataStorage dataStorage)
         {

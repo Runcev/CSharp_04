@@ -20,9 +20,9 @@ namespace Keneyz_03.ViewModel
 
         #region Fields
 
-        private List<Person> _personList = StationManager.DataStorage.PersonsList;
-        private string[] _sortByList = { "Name", "Surname", "Email", "Birthday", "WesternSign", "Chinese" };
-        private string[] _filterByList = { "Name", "Surname", "Email", "WesternSign", "Chinese" };
+        private readonly List<Person> _personList = StationManager.DataStorage.PersonsList;
+        private readonly string[] _sortByList = { "Name", "Surname", "Email", "Birthday", "Western", "Chinese" };
+        private readonly string[] _filterByList = { "Name", "Surname", "Email", "Western", "Chinese" };
 
         private RelayCommand<object> _addPersonCommand;
         private RelayCommand<object> _editPersonCommand;
@@ -41,21 +41,21 @@ namespace Keneyz_03.ViewModel
 
         public int SelectedSortByIndex
         {
-            get { return _sortByIndex; }
+            get => _sortByIndex;
             set
             {
                 _sortByIndex = value;
-                OnPropertyChanged("PersonList");
+                OnPropertyChanged(nameof(PersonList));
             }
         }
 
         public int SelectedFilterByIndex
         {
-            get { return _filterByIndex; }
+            get => _filterByIndex;
             set
             {
                 _filterByIndex = value;
-                OnPropertyChanged("PersonList");
+                OnPropertyChanged(nameof(PersonList));
             }
         }
 
@@ -118,22 +118,16 @@ namespace Keneyz_03.ViewModel
             }
         }
 
-        public IEnumerable<string> SortByList
-        {
-            get { return _sortByList; }
-        }
+        public IEnumerable<string> SortByList => _sortByList;
 
-        public IEnumerable<string> FilterByList
-        {
-            get { return _filterByList; }
-        }
+        public IEnumerable<string> FilterByList => _filterByList;
 
         public RelayCommand<object> AddPersonCommand
         {
             get
             {
-                return _addPersonCommand ?? (_addPersonCommand = new RelayCommand<object>(
-                           AddPersonImplementation));
+                return _addPersonCommand ??= new RelayCommand<object>(
+                    AddPersonImplementation);
             }
         }
 
@@ -141,8 +135,7 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _editPersonCommand ?? (_editPersonCommand =
-                           new RelayCommand<object>(EditPersonImplementation, CanExecuteRemoveOrEdit));
+                return _editPersonCommand ??= new RelayCommand<object>(EditPersonImplementation, CanExecuteRemoveOrEdit);
             }
         }
 
@@ -150,8 +143,8 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _refreshCommand ?? (_refreshCommand = new RelayCommand<object>(
-                           (o => { OnPropertyChanged("PersonList"); })));
+                return _refreshCommand ??= new RelayCommand<object>(
+                    (o => { OnPropertyChanged(nameof(PersonList)); }));
             }
         }
 
@@ -159,8 +152,7 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _removePersonCommand ?? (_removePersonCommand =
-                           new RelayCommand<object>(RemovePersonImplementation, CanExecuteRemoveOrEdit));
+                return _removePersonCommand ??= new RelayCommand<object>(RemovePersonImplementation, CanExecuteRemoveOrEdit);
             }
         }
 
@@ -168,8 +160,8 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _filterCommand ?? (_filterCommand = new RelayCommand<object>(
-                           (o => { OnPropertyChanged("PersonList"); })));
+                return _filterCommand ??= new RelayCommand<object>(
+                    (o => { OnPropertyChanged(nameof(PersonList)); }));
             }
         }
 
@@ -199,7 +191,7 @@ namespace Keneyz_03.ViewModel
 
                 {
                     StationManager.DataStorage.RemovePerson(personToRemove);
-                    OnPropertyChanged("PersonList");
+                    OnPropertyChanged(nameof(PersonList));
                 }
             });
 
@@ -229,9 +221,13 @@ namespace Keneyz_03.ViewModel
                     StationManager.CurrentPerson.Birthday
                 );
             });
+
             LoaderManeger.Instance.HideLoader();
+
             if (StationManager.EditVM != null)
-                StationManager.EditVM.updateAll();
+            {
+                StationManager.EditVM.UpdateAll();
+            }
 
             NavigationManager.Instance.Navigate(ViewType.EditView);
         }
@@ -241,11 +237,9 @@ namespace Keneyz_03.ViewModel
             return SelectedPerson != null;
         }
 
-
-
         public void UpdateInfo()
         {
-            OnPropertyChanged("PersonList");
+            OnPropertyChanged(nameof(PersonList));
         }
     }
 }

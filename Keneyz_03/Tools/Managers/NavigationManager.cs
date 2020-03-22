@@ -15,7 +15,7 @@ namespace Keneyz_03.Tools.Managers
                     return _instance;
                 lock (Locker)
                 {
-                    return _instance ?? (_instance = new NavigationManager());
+                    return _instance ??= new NavigationManager();
                 }
             }
         }

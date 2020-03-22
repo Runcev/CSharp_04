@@ -61,11 +61,11 @@ namespace Keneyz_03.Model
                 _chinese = ChineseCount();
 
                 OnPropertyChanged();
-                OnPropertyChanged("IsAdult");
-                OnPropertyChanged("IsBirthday");
-                OnPropertyChanged("BirthdayString");
-                OnPropertyChanged($"WesternSign");
-                OnPropertyChanged("ChineseSign");
+                OnPropertyChanged(nameof(IsAdult));
+                OnPropertyChanged(nameof(IsBirthday));
+                OnPropertyChanged(nameof(BirthdayString));
+                OnPropertyChanged(nameof(WesternSign));
+                OnPropertyChanged(nameof(ChineseSign));
             }
         }
 
@@ -75,10 +75,8 @@ namespace Keneyz_03.Model
             _surname = surname;
         }
 
-        public Person(string name, string surname, string email, DateTime birthday)
+        public Person(string name, string surname, string email, DateTime birthday) : this(name, surname)
         {
-            _name = name;
-            _surname = surname;
             _email = email;
             _birthday = birthday;
         }
@@ -98,7 +96,7 @@ namespace Keneyz_03.Model
 
         public bool IsAdult => (_age != -1) ? 18 <= _age : 18 <= (_age = AgeCount());
 
-        public string BirthdayString => _birthdayString ?? (_birthday.ToString("dd MMMM yyyy"));
+        public string BirthdayString => _birthdayString ?? (_birthday.ToString("ddd, dd-MM-yyy"));
 
         public string WesternSign => _western ??= WesternCount();
 

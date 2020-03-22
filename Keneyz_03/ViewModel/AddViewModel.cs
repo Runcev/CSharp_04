@@ -28,7 +28,7 @@ namespace Keneyz_03.ViewModel
         #region Properties
         public Person MyPerson
         {
-            get { return _person; }
+            get => _person;
             set
             {
                 _person = value;
@@ -40,8 +40,8 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _proceedCommand ?? (_proceedCommand = new RelayCommand<object>(
-                           ProceedImplementation, CanExecuteProceed));
+                return _proceedCommand ??= new RelayCommand<object>(
+                    ProceedImplementation, CanExecuteProceed);
             }
         }
 
@@ -49,8 +49,8 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new RelayCommand<object>(
-                           CancelImplementation));
+                return _cancelCommand ??= new RelayCommand<object>(
+                    CancelImplementation);
             }
         }
 
@@ -66,22 +66,24 @@ namespace Keneyz_03.ViewModel
                 }
                 catch (NotBornException e)
                 {
-                    MessageBox.Show($"Mistake with age: {e.Message}");
+                    MessageBox.Show($"Error: {e.Message}");
                     return false;
                 }
                 catch (TooOldException e)
                 {
-                    MessageBox.Show($"Mistake with age: {e.Message}");
+                    MessageBox.Show($"Error: {e.Message}");
                     return false;
                 }
                 catch (InvalidEmailExceptions e)
                 {
-                    MessageBox.Show($"Mistake with email: {e.Message}");
+                    MessageBox.Show($"Error: {e.Message}");
                     return false;
                 }
                 return true;
             });
+
             LoaderManeger.Instance.HideLoader();
+
             if (res)
             {
                 StationManager.DataStorage.AddPerson(_person);
@@ -92,7 +94,7 @@ namespace Keneyz_03.ViewModel
 
         private bool CanExecuteProceed(Object obj)
         {
-            return !String.IsNullOrWhiteSpace(MyPerson.Email) && !String.IsNullOrWhiteSpace(MyPerson.Name) && !String.IsNullOrWhiteSpace(MyPerson.Surname);
+            return !string.IsNullOrWhiteSpace(MyPerson.Email) && !string.IsNullOrWhiteSpace(MyPerson.Name) && !string.IsNullOrWhiteSpace(MyPerson.Surname);
         }
 
         private void CancelImplementation(object obj)

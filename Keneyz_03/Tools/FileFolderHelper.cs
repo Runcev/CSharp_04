@@ -9,10 +9,10 @@ namespace Keneyz_03.Tools
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         internal static readonly string AppFolderPath =
-            Path.Combine(AppDataPath, "Keneyz_04");
+            Path.Combine(AppDataPath, "Keneyz.Lab_04");
 
         internal static readonly string StorageFilePath =
-            Path.Combine(AppFolderPath, "Storage.Keneyz");
+            Path.Combine(AppFolderPath, "Storage.Lab_04");
 
         internal static bool CreateFolderAndCheckFileExistance(string filePath)
         {

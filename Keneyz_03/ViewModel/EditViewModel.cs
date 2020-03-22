@@ -19,8 +19,6 @@ namespace Keneyz_03.ViewModel
         #region Fields
 
         private Person _person = StationManager.CurrentPerson;
-
-        //Person object, which fields will be altered not to allow bad fields, when smth happens
         private Person _testPerson = StationManager.TestPerson;
 
         private RelayCommand<object> _confirmCommand;
@@ -30,7 +28,7 @@ namespace Keneyz_03.ViewModel
         #region Properties
         public Person TestPerson
         {
-            get { return _testPerson; }
+            get => _testPerson;
             set
             {
                 _testPerson = value;
@@ -42,8 +40,8 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _confirmCommand ?? (_confirmCommand = new RelayCommand<object>(
-                           ConfirmImplementation, CanExecuteProceed));
+                return _confirmCommand ??= new RelayCommand<object>(
+                    ConfirmImplementation, CanExecuteProceed);
             }
         }
 
@@ -51,8 +49,8 @@ namespace Keneyz_03.ViewModel
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new RelayCommand<object>(
-                           CancelImplementation));
+                return _cancelCommand ??= new RelayCommand<object>(
+                    CancelImplementation);
             }
         }
 
@@ -61,24 +59,24 @@ namespace Keneyz_03.ViewModel
         private async void ConfirmImplementation(object obj)
         {
             LoaderManeger.Instance.ShowLoader();
-            bool res = await Task.Run(() => {
+            var res = await Task.Run(() => {
                 try
                 {
                     _testPerson.Validate();
                 }
                 catch (NotBornException e)
                 {
-                    MessageBox.Show($"Mistake with age: {e.Message}");
+                    MessageBox.Show($"Error: {e.Message}");
                     return false;
                 }
                 catch (TooOldException e)
                 {
-                    MessageBox.Show($"Mistake with age: {e.Message}");
+                    MessageBox.Show($"Error: {e.Message}");
                     return false;
                 }
                 catch (InvalidEmailExceptions e)
                 {
-                    MessageBox.Show($"Mistake with email: {e.Message}");
+                    MessageBox.Show($"Error: {e.Message}");
                     return false;
                 }
                 return true;
@@ -99,7 +97,7 @@ namespace Keneyz_03.ViewModel
 
         private bool CanExecuteProceed(Object obj)
         {
-            return !String.IsNullOrWhiteSpace(TestPerson.Email) && !String.IsNullOrWhiteSpace(TestPerson.Name) && !String.IsNullOrWhiteSpace(TestPerson.Surname);
+            return !string.IsNullOrWhiteSpace(TestPerson.Email) && !string.IsNullOrWhiteSpace(TestPerson.Name) && !string.IsNullOrWhiteSpace(TestPerson.Surname);
         }
 
         private void CancelImplementation(object obj)
@@ -109,11 +107,11 @@ namespace Keneyz_03.ViewModel
 
         }
 
-        public void updateAll()
+        public void UpdateAll()
         {
             TestPerson = StationManager.TestPerson;
             _person = StationManager.CurrentPerson;
-            OnPropertyChanged("TestPerson");
+            OnPropertyChanged(nameof(TestPerson));
         }
     }
 }
