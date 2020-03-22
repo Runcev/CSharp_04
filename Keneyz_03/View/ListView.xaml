@@ -57,7 +57,7 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                 <DataGridTextColumn Header="Birthday" Binding="{Binding BirthdayString}"/>
                 <DataGridCheckBoxColumn Header="Adult" Binding="{Binding IsAdult, Mode=OneTime}" IsReadOnly="False" />
-                <DataGridCheckBoxColumn Header="Birthday" Binding="{Binding IsBirthday, Mode=OneWay}" IsReadOnly="False" />
+                <DataGridCheckBoxColumn Header="Is Birthday" Binding="{Binding IsBirthday, Mode=OneWay}" IsReadOnly="False" />
                 <DataGridTextColumn Header="Western sign" Binding="{Binding WesternSign}"/>
                 <DataGridTextColumn Header="Chinese sign" Binding="{Binding ChineseSign}"/>
             </DataGrid.Columns>
